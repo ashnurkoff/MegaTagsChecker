@@ -4,6 +4,13 @@ A powerful and comprehensive Chrome extension that analyzes and displays **20+ d
 
 ## 🚀 Features
 
+### **SEO Audit & Export Reports**
+- 📊 **Comprehensive SEO Scoring** - Automated analysis with weighted scoring system
+- 📋 **CSV Export** - Detailed spreadsheet reports for clients and team sharing
+- 📄 **PDF Reports** - Professional SEO audit reports perfect for agencies
+- 🎯 **Actionable Recommendations** - Prioritized suggestions for optimization
+- 📈 **Performance Metrics** - Overall SEO score with category breakdowns
+
 ### **Default Tags Analysis**
 - ✅ **Title Tag Detection** - Shows page title with character count and SEO optimization hints
 - 📝 **Meta Description** - Displays meta description with length validation and recommendations
@@ -77,6 +84,9 @@ A powerful and comprehensive Chrome extension that analyzes and displays **20+ d
 
 4. **Use the refresh button** to re-analyze after page changes
 5. **Click on URLs** in the interface to open images or canonical links
+6. **Export SEO Reports**:
+   - **CSV Export**: Download comprehensive spreadsheet with all meta tags and SEO scores
+   - **PDF Report**: Generate professional audit reports with scores and recommendations
 
 ## 📊 SEO Optimization Guidelines
 
@@ -210,12 +220,13 @@ We welcome contributions to make MegaTagsChecker even better!
 - Maintain the extension's performance and security standards
 
 ### **Roadmap Ideas**
-- Additional structured data schema types
-- Export functionality for SEO audits
+- ~~Export functionality for SEO audits~~ ✅ **COMPLETED**
 - Bulk URL analysis
 - Integration with popular SEO tools
 - Dark mode theme
 - Keyboard shortcuts
+- Advanced scoring algorithms
+- White-label report customization
 
 ## 📄 License
 
