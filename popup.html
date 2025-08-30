@@ -26,45 +26,261 @@
             </div>
 
             <div class="content" id="content" style="display: none;">
-                <div class="meta-section">
-                    <div class="meta-item">
-                        <div class="meta-label">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M4 19.5A2.5 2.5 0 0 1 1.5 17V7A2.5 2.5 0 0 1 4 4.5H20A2.5 2.5 0 0 1 22.5 7V17A2.5 2.5 0 0 1 20 19.5H4Z" stroke="currentColor" stroke-width="2"/>
-                                <path d="M9 9H20M9 13H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                            Title
-                        </div>
-                        <div class="meta-value" id="title-value">
-                            <span class="placeholder">No title found</span>
-                        </div>
-                        <div class="meta-count" id="title-count">0 characters</div>
-                    </div>
+                <!-- Tab Navigation -->
+                <div class="tab-navigation">
+                    <button class="tab-btn active" id="default-tab">Default Tags</button>
+                    <button class="tab-btn" id="advanced-tab">Advanced Tags</button>
+                </div>
 
-                    <div class="meta-item">
-                        <div class="meta-label">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M14.828 14.828L21 21M16.5 10.5C16.5 13.8137 13.8137 16.5 10.5 16.5C7.18629 16.5 4.5 13.8137 4.5 10.5C4.5 7.18629 7.18629 4.5 10.5 4.5C13.8137 4.5 16.5 7.18629 16.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            Description
+                <!-- Default Tags Section -->
+                <div class="tab-content active" id="default-content">
+                    <div class="meta-section">
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 19.5A2.5 2.5 0 0 1 1.5 17V7A2.5 2.5 0 0 1 4 4.5H20A2.5 2.5 0 0 1 22.5 7V17A2.5 2.5 0 0 1 20 19.5H4Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M9 9H20M9 13H20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Title
+                            </div>
+                            <div class="meta-value" id="title-value">
+                                <span class="placeholder">No title found</span>
+                            </div>
+                            <div class="meta-count" id="title-count">0 characters</div>
                         </div>
-                        <div class="meta-value" id="description-value">
-                            <span class="placeholder">No description found</span>
-                        </div>
-                        <div class="meta-count" id="description-count">0 characters</div>
-                    </div>
 
-                    <div class="meta-item">
-                        <div class="meta-label">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7 7H17M7 12H17M7 17H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                            Keywords
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14.828 14.828L21 21M16.5 10.5C16.5 13.8137 13.8137 16.5 10.5 16.5C7.18629 16.5 4.5 13.8137 4.5 10.5C4.5 7.18629 7.18629 4.5 10.5 4.5C13.8137 4.5 16.5 7.18629 16.5 10.5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Description
+                            </div>
+                            <div class="meta-value" id="description-value">
+                                <span class="placeholder">No description found</span>
+                            </div>
+                            <div class="meta-count" id="description-count">0 characters</div>
                         </div>
-                        <div class="meta-value" id="keywords-value">
-                            <span class="placeholder">No keywords found</span>
+
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M7 7H17M7 12H17M7 17H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                Keywords
+                            </div>
+                            <div class="meta-value" id="keywords-value">
+                                <span class="placeholder">No keywords found</span>
+                            </div>
+                            <div class="meta-count" id="keywords-count">0 keywords</div>
                         </div>
-                        <div class="meta-count" id="keywords-count">0 keywords</div>
+
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 15.5A3.5 3.5 0 1 1 12 8.5A3.5 3.5 0 0 1 12 15.5Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M19.4 15A1.65 1.65 0 0 0 21 13.35V10.65A1.65 1.65 0 0 0 19.4 9L17.7 7.35A1.65 1.65 0 0 0 16.05 7.35L14.35 9A1.65 1.65 0 0 0 14.35 10.65L16.05 12.35A1.65 1.65 0 0 0 17.7 12.35L19.4 15Z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                Viewport
+                            </div>
+                            <div class="meta-value" id="viewport-value">
+                                <span class="placeholder">No viewport found</span>
+                            </div>
+                            <div class="meta-count" id="viewport-count"></div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Robots
+                            </div>
+                            <div class="meta-value" id="robots-value">
+                                <span class="placeholder">No robots directive found</span>
+                            </div>
+                            <div class="meta-count" id="robots-count"></div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2"/>
+                                    <path d="M12 14C8.13401 14 5 17.134 5 21H19C19 17.134 15.866 14 12 14Z" stroke="currentColor" stroke-width="2"/>
+                                </svg>
+                                Author
+                            </div>
+                            <div class="meta-value" id="author-value">
+                                <span class="placeholder">No author found</span>
+                            </div>
+                            <div class="meta-count" id="author-count"></div>
+                        </div>
+
+                        <div class="meta-item">
+                            <div class="meta-label">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M10 13C10 16.3137 7.31371 19 4 19C7.31371 19 10 21.6863 10 25M21 13C21 16.3137 18.3137 19 15 19C18.3137 19 21 21.6863 21 25" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Canonical URL
+                            </div>
+                            <div class="meta-value" id="canonical-value">
+                                <span class="placeholder">No canonical URL found</span>
+                            </div>
+                            <div class="meta-count" id="canonical-count"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Advanced Tags Section -->
+                <div class="tab-content" id="advanced-content">
+                    <div class="meta-section">
+                        <!-- Open Graph Tags -->
+                        <div class="section-title">Open Graph Tags</div>
+                        <div class="meta-item">
+                            <div class="meta-label">OG Title</div>
+                            <div class="meta-value" id="og-title-value">
+                                <span class="placeholder">No OG title found</span>
+                            </div>
+                            <div class="meta-count" id="og-title-count"></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">OG Description</div>
+                            <div class="meta-value" id="og-description-value">
+                                <span class="placeholder">No OG description found</span>
+                            </div>
+                            <div class="meta-count" id="og-description-count"></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">OG Image</div>
+                            <div class="meta-value" id="og-image-value">
+                                <span class="placeholder">No OG image found</span>
+                            </div>
+                            <div class="meta-count" id="og-image-count"></div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">OG URL</div>
+                            <div class="meta-value" id="og-url-value">
+                                <span class="placeholder">No OG URL found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">OG Type</div>
+                            <div class="meta-value" id="og-type-value">
+                                <span class="placeholder">No OG type found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">OG Site Name</div>
+                            <div class="meta-value" id="og-site-name-value">
+                                <span class="placeholder">No OG site name found</span>
+                            </div>
+                        </div>
+
+                        <!-- Twitter Cards -->
+                        <div class="section-title">Twitter Cards</div>
+                        <div class="meta-item">
+                            <div class="meta-label">Twitter Card</div>
+                            <div class="meta-value" id="twitter-card-value">
+                                <span class="placeholder">No Twitter card found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Twitter Title</div>
+                            <div class="meta-value" id="twitter-title-value">
+                                <span class="placeholder">No Twitter title found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Twitter Description</div>
+                            <div class="meta-value" id="twitter-description-value">
+                                <span class="placeholder">No Twitter description found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Twitter Image</div>
+                            <div class="meta-value" id="twitter-image-value">
+                                <span class="placeholder">No Twitter image found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Twitter Site</div>
+                            <div class="meta-value" id="twitter-site-value">
+                                <span class="placeholder">No Twitter site found</span>
+                            </div>
+                        </div>
+
+                        <!-- Additional SEO Tags -->
+                        <div class="section-title">Additional SEO</div>
+                        <div class="meta-item">
+                            <div class="meta-label">Language</div>
+                            <div class="meta-value" id="language-value">
+                                <span class="placeholder">No language found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Publisher</div>
+                            <div class="meta-value" id="publisher-value">
+                                <span class="placeholder">No publisher found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Generator</div>
+                            <div class="meta-value" id="generator-value">
+                                <span class="placeholder">No generator found</span>
+                            </div>
+                        </div>
+
+                        <!-- Icons & Manifest -->
+                        <div class="section-title">Icons & Manifest</div>
+                        <div class="meta-item">
+                            <div class="meta-label">Favicon</div>
+                            <div class="meta-value" id="favicon-value">
+                                <span class="placeholder">No favicon found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Apple Touch Icon</div>
+                            <div class="meta-value" id="apple-touch-icon-value">
+                                <span class="placeholder">No Apple touch icon found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Web Manifest</div>
+                            <div class="meta-value" id="manifest-value">
+                                <span class="placeholder">No web manifest found</span>
+                            </div>
+                        </div>
+
+                        <!-- Performance Tags -->
+                        <div class="section-title">Performance</div>
+                        <div class="meta-item">
+                            <div class="meta-label">DNS Prefetch</div>
+                            <div class="meta-value" id="dns-prefetch-value">
+                                <span class="placeholder">No DNS prefetch found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Preconnect</div>
+                            <div class="meta-value" id="preconnect-value">
+                                <span class="placeholder">No preconnect found</span>
+                            </div>
+                        </div>
+                        <div class="meta-item">
+                            <div class="meta-label">Preload</div>
+                            <div class="meta-value" id="preload-value">
+                                <span class="placeholder">No preload found</span>
+                            </div>
+                        </div>
+
+                        <!-- Structured Data -->
+                        <div class="section-title">Structured Data</div>
+                        <div class="meta-item">
+                            <div class="meta-label">JSON-LD Schema</div>
+                            <div class="meta-value" id="structured-data-value">
+                                <span class="placeholder">No structured data found</span>
+                            </div>
+                            <div class="meta-count" id="structured-data-count"></div>
+                        </div>
                     </div>
                 </div>
 
