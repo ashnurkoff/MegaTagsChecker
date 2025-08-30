@@ -92,7 +92,30 @@ document.addEventListener('DOMContentLoaded', function() {
 
     exportPdfBtn.addEventListener('click', function() {
         if (currentMetaData) {
+            // Show loading state
+            exportPdfBtn.disabled = true;
+            exportPdfBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                    <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Generating...
+            `;
+            
             exportToPDF(currentMetaData);
+            
+            // Reset button after delay
+            setTimeout(() => {
+                exportPdfBtn.disabled = false;
+                exportPdfBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M14 2H6A2 2 0 0 0 4 4V20A2 2 0 0 0 6 22H18A2 2 0 0 0 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="14,2 14,8 20,8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="9" y1="15" x2="15" y2="15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Export PDF
+                `;
+            }, 3000);
         }
     });
 
@@ -855,29 +878,85 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function exportToPDF(metaData) {
-        // For now, we'll create a simple PDF using browser print functionality
-        // We'll create a printable report and trigger print dialog
-        const reportWindow = window.open('', '_blank');
+        // Create a better PDF generation approach
         const reportContent = generatePDFContent(metaData);
         
-        reportWindow.document.write(reportContent);
-        reportWindow.document.close();
+        // Create a blob with the HTML content
+        const htmlBlob = new Blob([reportContent], { type: 'text/html' });
+        const htmlUrl = URL.createObjectURL(htmlBlob);
         
-        // Wait for content to load then print
+        // Open in a new window optimized for PDF generation
+        const pdfWindow = window.open(htmlUrl, '_blank', 'width=800,height=600,scrollbars=yes,resizable=yes');
+        
+        // Wait for content to load
         setTimeout(() => {
-            reportWindow.print();
+            if (pdfWindow) {
+                // Add print-specific styling and trigger print
+                pdfWindow.addEventListener('load', () => {
+                    // Add a print button and instructions
+                    const printInstructions = pdfWindow.document.createElement('div');
+                    printInstructions.style.cssText = `
+                        position: fixed;
+                        top: 10px;
+                        right: 10px;
+                        background: #667eea;
+                        color: white;
+                        padding: 15px;
+                        border-radius: 8px;
+                        font-family: Arial, sans-serif;
+                        font-size: 14px;
+                        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+                        z-index: 9999;
+                        cursor: pointer;
+                        user-select: none;
+                    `;
+                    const filename = `seo-audit-${getFilenameSafeUrl(metaData.url)}-${getTimestamp()}.pdf`;
+                    printInstructions.innerHTML = `
+                        <div style="margin-bottom: 10px;"><strong>📄 Ready to Save as PDF</strong></div>
+                        <div style="font-size: 11px; margin-bottom: 8px; opacity: 0.9;">Suggested filename:</div>
+                        <div style="font-size: 10px; font-family: monospace; background: rgba(255,255,255,0.3); padding: 4px 6px; border-radius: 3px; margin-bottom: 10px; word-break: break-all;">${filename}</div>
+                        <div style="font-size: 12px; margin-bottom: 10px;">Press Ctrl+P (Cmd+P on Mac)<br>Select "Save as PDF" as destination</div>
+                        <div style="text-align: center; padding: 8px; background: rgba(255,255,255,0.2); border-radius: 4px; cursor: pointer;" onclick="window.print()">🖨️ Save as PDF</div>
+                        <div style="text-align: center; padding: 6px; background: rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer; margin-top: 8px; font-size: 12px;" onclick="window.close()">✖️ Close Window</div>
+                    `;
+                    
+                    // Insert at the beginning of body
+                    pdfWindow.document.body.insertBefore(printInstructions, pdfWindow.document.body.firstChild);
+                    
+                    // Set the document title for better PDF naming
+                    pdfWindow.document.title = filename;
+                    
+                    // Auto-trigger print dialog after a short delay
+                    setTimeout(() => {
+                        pdfWindow.print();
+                    }, 1000);
+                });
+                
+                // If the window is already loaded
+                if (pdfWindow.document.readyState === 'complete') {
+                    pdfWindow.dispatchEvent(new Event('load'));
+                }
+            }
         }, 500);
+        
+        // Clean up the blob URL after some time
+        setTimeout(() => {
+            URL.revokeObjectURL(htmlUrl);
+        }, 30000); // 30 seconds
     }
 
     function generatePDFContent(metaData) {
         const timestamp = new Date().toLocaleString();
         const audit = metaData.seoAudit;
+        const filename = `seo-audit-${getFilenameSafeUrl(metaData.url)}-${getTimestamp()}`;
         
         return `
         <!DOCTYPE html>
         <html>
         <head>
-            <title>SEO Audit Report</title>
+            <title>${filename}</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -980,9 +1059,44 @@ document.addEventListener('DOMContentLoaded', function() {
                     font-size: 12px;
                 }
                 @media print {
-                    body { margin: 0; padding: 15px; }
-                    .header { page-break-inside: avoid; }
-                    .section { page-break-inside: avoid; }
+                    body { 
+                        margin: 0; 
+                        padding: 15px; 
+                        font-size: 12px;
+                        -webkit-print-color-adjust: exact;
+                        color-adjust: exact;
+                    }
+                    .header { 
+                        page-break-inside: avoid;
+                        margin-bottom: 20px;
+                    }
+                    .section { 
+                        page-break-inside: avoid;
+                        margin-bottom: 15px;
+                    }
+                    .score-summary {
+                        page-break-inside: avoid;
+                        margin-bottom: 20px;
+                    }
+                    .meta-item {
+                        page-break-inside: avoid;
+                        margin-bottom: 8px;
+                        padding: 10px;
+                    }
+                    .recommendations {
+                        page-break-inside: avoid;
+                    }
+                    /* Hide the print instructions when printing */
+                    div[style*="position: fixed"] {
+                        display: none !important;
+                    }
+                    /* Ensure colors are preserved */
+                    .overall-score,
+                    .score-badge,
+                    .header h1 {
+                        -webkit-print-color-adjust: exact;
+                        color-adjust: exact;
+                    }
                 }
             </style>
         </head>
