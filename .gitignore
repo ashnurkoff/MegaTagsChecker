@@ -57,6 +57,9 @@ promo-images/
 *.bak
 *.backup
 
+# Legacy files (preserved for reference)
+# popup-legacy.js
+
 # Archive files
 *.tar.gz
 *.rar
